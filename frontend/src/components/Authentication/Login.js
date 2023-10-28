@@ -3,6 +3,7 @@ import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, V
 import { useToast } from '@chakra-ui/react'
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { ChatState } from "../../Context/ChatProvider";
 
 const Login = () => {
 
@@ -13,6 +14,7 @@ const Login = () => {
     const handleClick = () => setShow(!show);
     const toast = useToast();
     const history = useHistory();
+    const {setUser} = ChatState();
 
     const submitHandler = async() => {
         setLoading(true);
@@ -34,7 +36,7 @@ const Login = () => {
                 }
             };
 
-            const {data} = await axios.post('/api/user/login', {email: Email, password: Password}, config);
+            const {data} = await axios.post('/api/user/login', {email:Email, password: Password}, config);
 
             toast({
                 title: "Logged in successfully",
@@ -43,6 +45,7 @@ const Login = () => {
                 isClosable: true,
                 position: "bottom"
               });
+                setUser(data);
               localStorage.setItem('userInfo', JSON.stringify(data));
                 setLoading(false);
                 history.push('/chats');
@@ -62,7 +65,7 @@ const Login = () => {
 
 
     return (
-        <VStack spacing={"5px"}>
+        <VStack spacing={"10px"}>
 
             <FormControl id='email2' isRequired>
                 <FormLabel>Email</FormLabel>

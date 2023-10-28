@@ -87,9 +87,9 @@ const Login = () => {
                 Login
             </Button>
 
-            <Button variant={"solid"} colorScheme={"red"} width={"100%"} onClick={()=> {setEmail("guest@gmail.com"); setPassword("654321")}}>
-                Get Guest Account
-            </Button>
+            // <Button variant={"solid"} colorScheme={"red"} width={"100%"} onClick={()=> {setEmail("guest@gmail.com"); setPassword("654321")}}>
+            //     Get Guest Account
+            // </Button>
         </VStack>
     );
 };

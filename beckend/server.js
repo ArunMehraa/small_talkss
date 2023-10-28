@@ -12,14 +12,16 @@ const cors = require('cors');
 const path = require('path');
 
 const PORT = process.env.PORT || 1000;
+const NODE_ENV = process.env.NODE_ENV || 'production';
+
 const app = express();
 connectDB();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('API is running successfully');
-});
+// app.get('/', (req, res) => {
+//     res.send('API is running successfully');
+// });
 
 app.use(cors({ origin: '*' }))
 
@@ -30,13 +32,13 @@ app.use('/api/message', messageRoutes);
 //--------Deployment Code--------//
 
 const __dirname1 = path.resolve();
-if(process.env.NODE_ENV === 'production'){
+if(NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname1, '/frontend/build')));
-    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname1, 'frontend', 'build', 'index.html')));
+    app.get('*', (req, res) => {res.sendFile(path.resolve(__dirname1, 'frontend', 'build', 'index.html')) });
 }
 else{
     app.get('/', (req, res) => {
-        res.send('API is running successfully');
+        res.send('API is running ...');
     });
 }
 

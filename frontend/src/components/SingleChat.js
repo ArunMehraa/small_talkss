@@ -13,7 +13,9 @@ import io from "socket.io-client";
 import Lottie from "react-lottie";
 import animationData from "../animations/typing.json"
 
-const ENDPOINT = "http://localhost:1000";
+// const ENDPOINT = "http://localhost:1000";
+const ENDPOINT = "https://small-talks-c376.onrender.com";
+
 var socket, selectedChatCompare;
 
 const defaultOptions = {

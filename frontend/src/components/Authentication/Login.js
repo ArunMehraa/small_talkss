@@ -86,10 +86,7 @@ const Login = () => {
             <Button colorScheme="blue" color={"white"} width={"100%"} style={{marginTop:20}} onClick={submitHandler} isLoading={loading} >
                 Login
             </Button>
-
-            // <Button variant={"solid"} colorScheme={"red"} width={"100%"} onClick={()=> {setEmail("guest@gmail.com"); setPassword("654321")}}>
-            //     Get Guest Account
-            // </Button>
+            // guest user Button 
         </VStack>
     );
 };

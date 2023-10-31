@@ -18,7 +18,7 @@ const Homepage = () => {
     return (
         <Container>
             <Box
-                bg="linear-gradient(to right top, #4226c2, #9f00a6, #cd0085, #e51867, #ed4f4f);"
+                bg="linear-gradient(to right top, #050410, #251f4a, #512e85, #9131bc, #df12eb)"
                 w="100%"
                 display="flex"
                 p={3}

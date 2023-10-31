@@ -47,15 +47,18 @@ const MyChats = ({fetchAgain}) => {
             display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
             flexDir="column"
             alignItems="center"
-            p={3}
-            bg="white"
+            p={4}
+            bg="blackAlpha.700"
             w={{ base: "100%", md: "31%" }}
             borderRadius="lg"
-            borderWidth="1px"
+            // borderWidth="0px"
+            borderRightWidth={"1px"}
         >
             <Box
                 pb={3}
                 px={3}
+                fontWeight="bold"
+                textColor="white"
                 fontSize={{ base: "28px", md: "30px" }}
                 fontFamily="Work sans"
                 display="flex"
@@ -63,11 +66,12 @@ const MyChats = ({fetchAgain}) => {
                 justifyContent="space-between"
                 alignItems="center"
             >
-                My Chats
-            <GroupChatModal>
+                Chats
+            <GroupChatModal >
                 <Button
+                    bg="messenger.50"
                     display="flex"
-                    fontSize={{ base: "17px", md: "10px",lg:"17px"  }}
+                    fontSize={{ base: "17px", md: "10px", lg:"17px"  }}
                     rightIcon={<AddIcon />}
                     >New Group Chat</Button>
             </GroupChatModal>
@@ -76,7 +80,7 @@ const MyChats = ({fetchAgain}) => {
                 display="flex"
                 flexDir="column"
                 p={3}
-                bg='#F8F8F8'
+                bg="whiteAlpha.300"
                 w="100%"
                 h="100%"
                 borderRadius="lg"
@@ -88,13 +92,14 @@ const MyChats = ({fetchAgain}) => {
                                     <Box
                                         onClick={() => setSelectedChat(chat)}
                                         cursor="pointer"
-                                        bg={selectedChat === chat ? "purple.500" : "#E8E8E8"}
+                                        bg={selectedChat === chat ? "purple.600" : "whiteAlpha.700"}
                                         color={selectedChat === chat ? "white" : "black"}
                                         px={3}
                                         py={2}
                                         borderRadius="lg"
                                         key={chat._id}
                                         >
+
                                            <Text>
                                                 {!chat.isGroupChat ? (getSender(loggedUser,chat.users)) : (chat.chatName)}
                                             </Text>

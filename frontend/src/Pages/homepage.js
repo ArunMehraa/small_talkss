@@ -2,7 +2,7 @@ import { Container, Text, Box, Tab, Tabs,TabList,TabPanel,TabPanels } from "@cha
 import React from "react";
 import Login from "../components/Authentication/Login";
 import Signup from "../components/Authentication/Signup";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router";
 import { useEffect } from "react";
 
 const Homepage = () => {
@@ -16,7 +16,7 @@ const Homepage = () => {
     },[history]);
 
     return (
-        <Container>
+        <Container maxW="xl" centerContent>
             <Box
                 bg="linear-gradient(to right top, #050410, #251f4a, #512e85, #9131bc, #df12eb)"
                 w="100%"
@@ -25,7 +25,7 @@ const Homepage = () => {
                 m={"40px 0 15px 0"}
                 borderRadius="lg"
                 borderWidth="1px"
-                justifyContent={"center"}
+                justifyContent="center"
             >
                 <Text
                     fontSize="4xl"
@@ -36,14 +36,14 @@ const Homepage = () => {
                 >Small Talks</Text>
             </Box>
             <Box
-                bg={"white"}
+                bg={"whiteAlpha.900"}
                 color={"black"}
                 w={"100%"}
                 p={4}
                 borderRadius={"lg"}
                 borderWidth={"1px"}
             >
-                <Tabs variant='soft-rounded' colorScheme='orange'>
+                <Tabs variant='soft-rounded' colorScheme="purple">
                     <TabList mb={"1em"}>
                         <Tab width="50%">Login</Tab>
                         <Tab width="50%">Sign Up</Tab>

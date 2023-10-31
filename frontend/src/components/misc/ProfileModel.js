@@ -20,7 +20,7 @@ const ProfileModel = ({user,children}) => {
 
         <Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered >
          <ModalOverlay/>
-         <ModalContent h="410px" bg="linear-gradient(to right top, #05030c, #1b1531, #321d56, #50227a, #751f9c)" borderWidth={0.1} borderColor="gray">
+         <ModalContent h="450px" bg="linear-gradient(to right top, #05030c, #1b1531, #321d56, #50227a, #751f9c)" borderWidth={0.1} borderColor="gray">
             <ModalHeader textColor="white" fontSize="40px" fontFamily="Work sans" display="flex" justifyContent="center" >{user.name}</ModalHeader>
             <ModalCloseButton/>
             <ModalBody display="flex" flexDir="column" alignItems="center" justifyContent="space-between" >

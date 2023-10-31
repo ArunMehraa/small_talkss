@@ -11,7 +11,7 @@ import axios from 'axios';
 import UserListItem from '../UserAvatar/UserListItem';
 import { getSender } from '../../config/ChatLogics';
 import NotificationBadge from 'react-notification-badge';
-// import { useEffect } from 'react';
+
 
 const SideDrawer = () => {
     const [search, setSearch] = useState('');
@@ -97,9 +97,9 @@ const SideDrawer = () => {
 
     return (
         <>
-            <Box display="flex" justifyContent='space-between' alignContent='center' bg='white' w='100%' p='5px 10px 5px 10px' borderWidth='5px'>
+            <Box display="flex" justifyContent='space-between' alignContent='center' bg="blackAlpha.800" w='100%' p='13px 10px 10px 10px' borderWidth='0.5px' borderColor="purple.500">
                 <Tooltip label="search users to chat" hasArrow placement='bottom-end'>
-                    <Button variant="ghost" bg="gray.200" onClick={onOpen}>
+                    <Button p="0.5%" variant="ghost" bg="gray.200" onClick={onOpen}>
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <Text d={{ base: "none", md: "flex" }} px="4" >
                             Search User
@@ -107,15 +107,15 @@ const SideDrawer = () => {
                     </Button>
                 </Tooltip>
 
-                <Text fontSize="2xl" fontWeight="bold" font fontFamily='Work sans'>
-                    Small-Talks
+                <Text fontSize="3xl" fontWeight="extrabold" textColor="white" textDecoration="Window" fontFamily='Work sans'>
+                    Small Talks
                 </Text>
 
                 <div>
                     <Menu>
-                        <MenuButton p={1}>
+                        <MenuButton p={1} mr={3}>
                             <NotificationBadge count={notifications.length} />
-                            <BellIcon fontSize={"2xl"} m={1} />
+                            <BellIcon color="whiteAlpha.900" fontSize={"2xl"} m={1} />
                         </MenuButton>
                         <MenuList pl={2}>
                             {!notifications.length && "No New Notifications"}
@@ -131,7 +131,7 @@ const SideDrawer = () => {
                         </MenuList>
                     </Menu>
                     <Menu >
-                        <MenuButton bg="white" as={Button} rightIcon={<ChevronDownIcon />}>
+                        <MenuButton mr={1} bg="gray.200" as={Button} rightIcon={<ChevronDownIcon />}>
                             <Avatar size="sm" cursor="pointer" name={user.name} src={user.pic}></Avatar>
                         </MenuButton>
                         <MenuList>
@@ -147,11 +147,13 @@ const SideDrawer = () => {
             <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
                 <DrawerContent>
-                    <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
-                    <DrawerBody>
-                        <Box display="flex" pb={2}>
+                    <DrawerHeader bg="linear-gradient(to right, #02020a, #1f1c2e, #3c2f50, #604171, #8b5290)"  borderColor="gray" borderWidth="1px" borderBottomWidth="1px" textColor="white" >Search Users</DrawerHeader>
+                    <DrawerBody bg="linear-gradient(to right top, #070715, #1f1c39, #3e2b5e, #663781, #973f9f)"  borderWidth={1} borderLeftStyle="none" borderColor={"gray"} >
+                        <Box display="flex" pb={2} mt={2}>
                             <Input
+                                bg={"whiteAlpha.800"}
                                 placeholder='Search by Name or Email'
+                                
                                 mr={2}
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}

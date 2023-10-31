@@ -76,17 +76,16 @@ const Login = () => {
                 <InputGroup>
                 <Input type={show? "text" :"password"} placeholder="Enter Your Password" onChange={(e)=> setPassword(e.target.value)}/>
                 <InputRightElement width={'4.5rem'}>
-                    <Button color={"blackAlpha.500"} h={'1.75rem'} size={'sm'} onClick={handleClick}>
+                    <Button bg="gray.300" color={"blackAlpha.500"} h={'1.75rem'} size={'sm'} onClick={handleClick}>
                         {show ? "Hide" : "Show"}
                     </Button>
                 </InputRightElement>
                 </InputGroup>
             </FormControl>
 
-            <Button colorScheme="blue" color={"white"} width={"100%"} style={{marginTop:20}} onClick={submitHandler} isLoading={loading} >
+            <Button colorScheme="purple" color={"white"} width={"100%"} style={{marginTop:20}} onClick={submitHandler} isLoading={loading} >
                 Login
             </Button>
-            // guest user Button 
         </VStack>
     );
 };

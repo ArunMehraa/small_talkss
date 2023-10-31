@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
-import { Box, IconButton, Input, Spinner, Text,FormControl } from "@chakra-ui/react";
+import { Box, IconButton, Input, Spinner, Text,FormControl, Avatar, Image } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { getSender, getSenderFull } from "../config/ChatLogics";
+import { getSender, getSenderFull, getSenderPic } from "../config/ChatLogics";
 import ProfileModel from "./misc/ProfileModel";
 import UpdateGroupChatModal from "./misc/UpdateGroupChatModal";
 import axios from "axios";
@@ -15,17 +15,8 @@ import animationData from "../animations/typing.json"
 
 // const ENDPOINT = "http://localhost:1000";
 const ENDPOINT = "https://small-talks-c376.onrender.com";
-
 var socket, selectedChatCompare;
 
-const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice",
-    },
-};
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const { user, selectedChat, setSelectedChat,notifications,setNotifications } = ChatState();
@@ -35,8 +26,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const [socketConnected,setSocketConnected] = useState(false);
     const [typing,setTyping] = useState(false);
     const [isTyping,setIsTyping] = useState(false);
-
+    
     const toast = useToast();
+    
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+        },
+    };
 
     const fetchMessages = async () => {
         if(!selectedChat)   return;
@@ -64,16 +64,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         }
     };
     
-    useEffect(() => {
-        socket = io(ENDPOINT);
-        socket.emit('setup',user);
-        socket.on('connected', () => {
-            setSocketConnected(true);
-        })
-        socket.on("typing",() => setIsTyping(true));
-        socket.on("stop typing",() => setIsTyping(false));
-    }, []);
-    
     const sendMessage =  async(event) => {
         if(event.key === "Enter" && newMessage){
             socket.emit("stop typing",selectedChat._id);
@@ -86,7 +76,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 };
                 setNewMessage("");
                 const {data} = await axios.post('/api/message',{content:newMessage,chatId:selectedChat},config);
-
+                
                 socket.emit("new message",data);
                 setMessages([...messages,data]);
             } catch (error) {
@@ -101,10 +91,24 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             }
         }
     }
+    
+    useEffect(() => {
+        socket = io(ENDPOINT);
+        socket.emit('setup',user);
+        socket.on('connected', () => {
+            setSocketConnected(true);
+        })
+        socket.on("typing",() => setIsTyping(true));
+        socket.on("stop typing",() => setIsTyping(false));
 
+        // eslint-disable-next-line
+    }, []);
+    
     useEffect(() => {
         fetchMessages();
         selectedChatCompare = selectedChat;
+
+        // eslint-disable-next-line
     }, [selectedChat]);
 
     useEffect(()=>{
@@ -119,8 +123,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             else{
                 setMessages([...messages,newMessageRecieved]);
             }
-        })
-    })
+        });
+    });
 
     const typingHandler = (e) => {
         setNewMessage(e.target.value);
@@ -148,6 +152,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             {selectedChat ? (
                 <>
                     <Text
+                        textColor="white"
                         fontSize={{ base: "28px", md: "30px" }}
                         pb={3}
                         px={2}
@@ -157,6 +162,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                         justifyContent={{ base: "space-between" }}
                         alignItems="center"
                     >
+                    <Avatar src={selectedChat.isGroupChat ? selectedChat.chatPic : getSenderPic(user, selectedChat.users)} size="md" display="flex"/>
                         <IconButton
                             display={{ base: "flex", md: "none" }}
                             icon={<ArrowBackIcon />}
@@ -184,7 +190,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                         flexDir="column"
                         justifyContent="flex-end"
                         p={3}
-                        bg="#E8E8E8"
+                        bg="whiteAlpha.300"
                         w="100%"
                         h="100%"
                         borderRadius="lg"
@@ -204,10 +210,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                             </div>
 
                         )}
-                        <FormControl onKeyDown={sendMessage} isRequired mt={3}>
+                        <FormControl onKeyDown={sendMessage} id="first-name" isRequired mt={3}>
                             
                             {isTyping ? <div> <Lottie options={defaultOptions} width={70} style={{marginBottom:15 , marginLeft:0}}/> </div>: <></>}
-                            <Input variant="filled" placeholder="Type a message.." bg="#E0E0E0" onChange={typingHandler} value={newMessage}/>
+                            <Input textColor="white"  variant="filled" placeholder="Type a message.." bg="linear-gradient(to right, #010009, #18151b, #292328, #3c3236, #4e4244)" onChange={typingHandler} value={newMessage}/>
                         </FormControl>
                     </Box>
                 </>

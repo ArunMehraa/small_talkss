@@ -45,3 +45,7 @@ export const isSameSender = (messages, m, i, userId) => {
     return 0;
   else return "auto";
 };
+
+export const getSenderPic = (loggedUser, users) => {
+  return users[0]._id === loggedUser._id ? users[1].pic : users[0].pic;
+};
